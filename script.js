@@ -13,16 +13,32 @@ window.addEventListener("load",function(){
                 let template="";
 
                 for(let i =0; i<json.length;i++){
+                    let name="";
+                    let hours="";
+                    let active="";
+                    let skills="default";
+                    let pic="";
+
+                    name = json[i].firstName + " " + json[i].lastName
+                    hours= json[i].hoursInSpace;
+                    active = json[i].active;
+                    
+                    skills = json[i].skills;
+                    // for (let j =0; j<json[i].skills.length; i++){
+                    //     skills += json[i].skills[j];
+                    // }
+                    pic = json[i].picture;
+                    
                     template+=`<div class="astronaut">
                     <div class="bio">
-                       <h3>Mae Jemison</h3>
+                       <h3>${name}</h3>
                        <ul>
-                          <li>Hours in space: 190</li>
-                          <li>Active: false</li>
-                          <li>Skills: Physician, Chemical Engineer</li>
+                          <li>Hours in space: ${hours}</li>
+                          <li>Active: ${active}</li>
+                          <li>Skills: ${skills}</li>
                        </ul>
                     </div>
-                    <img class="avatar" src="images/mae-jemison.jpg">
+                    <img class="avatar" src="${pic}">
                  </div>`
                 }
                  let container = document.getElementById("container");
