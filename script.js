@@ -1,54 +1,28 @@
-// TODO: add code here
-window.addEventListener("load",function(){
-    let url = "https://handlers.education.launchcode.org/static/astronauts.json";
-    let json=[];
-    //this.console.log("in onLoad, fetch url:", url);
-    fetch(url)
-        .then(function(response){
-            response.json()
-            .then(function(jsonTemp){
-                json=jsonTemp;
-                //console.log("json in loop:",json);
+window.addEventListener('load', function() {
+    let url = 'https://handlers.education.launchcode.org/static/astronauts.json';
 
-                let template="";
+    fetch(url).then(function(response) {
+        response.json().then(function(json) {
+            let template = '';
 
-                for(let i =0; i<json.length;i++){
-                    let name="";
-                    let hours="";
-                    let active="";
-                    let skills="default";
-                    let pic="";
+            json.forEach(function(elem) {
 
-                    name = json[i].firstName + " " + json[i].lastName
-                    hours= json[i].hoursInSpace;
-                    active = json[i].active;
-                    
-                    skills = json[i].skills;
-                    // for (let j =0; j<json[i].skills.length; i++){
-                    //     skills += json[i].skills[j];
-                    // }
-                    pic = json[i].picture;
-                    
-                    template+=`<div class="astronaut">
-                    <div class="bio">
-                       <h3>${name}</h3>
-                       <ul>
-                          <li>Hours in space: ${hours}</li>
-                          <li>Active: ${active}</li>
-                          <li>Skills: ${skills}</li>
-                       </ul>
-                    </div>
-                    <img class="avatar" src="${pic}">
-                 </div>`
-                }
-                 let container = document.getElementById("container");
-                 container.innerHTML=template;
+              let name = [elem.firstName, elem.lastName].join(' ');
+              
+              template += `<div class="astronaut">
+                <div class="bio">
+                   <h3>${elem.name}</h3>
+                   <ul>
+                      <li>Hours in space: ${elem.hoursInSpace}</li>
+                      <li>Active: ${elem.active}</li>
+                      <li>Skills: ${elem.skills}</li>
+                   </ul>
+                </div>
+                <img class="avatar" src="${elem.picture}">
+              </div>`;
+            });
 
-            })
-            
+            document.getElementById('container').innerHTML = template;
         })
-    
-    
-    
-
+    })
 });
